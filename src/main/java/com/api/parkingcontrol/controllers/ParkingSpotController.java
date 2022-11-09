@@ -40,7 +40,7 @@ public class ParkingSpotController {
 
     //LISTANDO DADO ESPECIFICO
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") Long id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.finById(id);
         if(!parkingSpotModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dados não encontrados.");
@@ -74,7 +74,7 @@ public class ParkingSpotController {
     //ATUALIZAR DADOS
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateParkingSpot
-            (@PathVariable(value = "id") UUID id, @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
+            (@PathVariable(value = "id") Long id, @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.finById(id);
 
         if(!parkingSpotModelOptional.isPresent()) {
@@ -89,7 +89,7 @@ public class ParkingSpotController {
 
     //DELETE DADOS
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "id") Long id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.finById(id);
         if(!parkingSpotModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dados não encontrados.");

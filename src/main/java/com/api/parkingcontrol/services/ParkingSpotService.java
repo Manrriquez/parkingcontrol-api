@@ -44,7 +44,7 @@ public class ParkingSpotService {
         return parkingSpotRepository.findAll(pageable);
     }
 
-    public Optional<ParkingSpotModel> finById(UUID id) {
+    public Optional<ParkingSpotModel> finById(Long id) {
         return parkingSpotRepository.findById(id);
     }
 
