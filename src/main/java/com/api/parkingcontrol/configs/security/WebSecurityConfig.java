@@ -2,6 +2,7 @@ package com.api.parkingcontrol.configs.security;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -13,6 +14,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic()
                 .and()
                 .authorizeHttpRequests()
-                .anyRequest().permitAll();
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("Luixx")
+                .password("123")
+                .roles("ADMIN");
     }
 }
