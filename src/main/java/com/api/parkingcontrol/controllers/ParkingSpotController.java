@@ -42,10 +42,7 @@ public class ParkingSpotController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") Long id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.finById(id);
-        if(!parkingSpotModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dados não encontrados.");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
+        return parkingSpotModelOptional.<ResponseEntity<Object>>map(parkingSpotModel -> ResponseEntity.status(HttpStatus.OK).body(parkingSpotModel)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dados não encontrados."));
     }
 
     //METOODO DE POST, REGISTRAR DADOS
